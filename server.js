@@ -31,7 +31,7 @@ io.sockets.on("connection",function (socket) {
 
     socket.on('disconnect', function(){
         if(socket.name != undefined){
-            var ayrildiData = socket.name + ' adlı kullanıcı odadan ayrıldı.' + socket.id;
+            var ayrildiData = socket.name + ' adlı kullanıcı odadan ayrıldı.';
             console.log(ayrildiData);
             io.sockets.emit("ayrildi", ayrildiData);
         }
@@ -46,7 +46,7 @@ io.sockets.on("connection",function (socket) {
     socket.on('join', function (name) {
         socket.name = escapeHtml(name);
         console.log(socket.name + ' adlı kullanıcı odaya katıldı.');
-        var katildiData = socket.name + ' adlı kullanıcı odaya katıldı.' + socket.id;
+        var katildiData = socket.name + ' adlı kullanıcı odaya katıldı.';
         io.sockets.emit("katildi", katildiData);
     });
 
@@ -55,13 +55,10 @@ io.sockets.on("connection",function (socket) {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/",function (req,res) {
 
-    res.sendFile(path.join(__dirname + "/index.html"));
-    var ip = req.headers['x-forwarded-for'] ||
-        req.connection.remoteAddress ||
-        req.socket.remoteAddress ||
-        req.connection.socket.remoteAddress;
-    console.log(ip);
+app.get("/",function (req, res) {
+
+    res.sendFile(path.join(__dirname+"/index.html"));
+
 
 });
