@@ -56,15 +56,9 @@ io.sockets.on("connection",function (socket) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-<<<<<<< HEAD
 app.get("/beta",function (req, res) {
 
     res.sendFile(path.join(__dirname+"/beta/index.html"));
-=======
-app.get("/",function (req, res) {
-
-    res.sendFile(path.join(__dirname+"/index.html"));
->>>>>>> origin/master
 
 
 });
