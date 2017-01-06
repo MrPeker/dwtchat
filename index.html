@@ -1,7 +1,7 @@
 <html class="mdl-js">
 <head>
     <title>
-        Mehmet Ali Peker - Chat
+        Deep Web Türkiye (DWT) - Chat
     </title>
     <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.pink-indigo.min.css">
     <link href="css/styles.css" rel="stylesheet" />
@@ -13,25 +13,37 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io.connect();
+        var kullanici = "";
         $(document).ready(function () {
             $( ".kullaniciAdi" ).animate({
                 opacity: 1
-            }, 5000, function() {
+            }, 3000,'easeOutCirc', function() {
             });
             $("input#kullaniciAdi").keyup(function (e) {
 
                 var tus = e.keyCode;
                 if(tus == 13) {
-                    var kullanici = $("#kullaniciAdi").val();
+                    kullanici = $("#kullaniciAdi").val();
                     socket.emit("join", kullanici);
                     console.log(kullanici);/*
                     $(".kullaniciAdi").hide("fast", function () {
                         this.remove();
                     });*/
-                    $( ".kullaniciAdi" ).animate({
-                        opacity: 0
-                    }, 5000, function() {
-                        this.remove();
+                    $(".kullaniciAdi>center>h3").animate({
+                       opacity: .1
+                    },1000,"easeOutCirc");
+                    $("#kullaniciAdi").animate({
+                        opacity: .1
+                    },1000,"easeOutCirc",function () {
+                        $("center>h3").html("Hoşgeldiniz");
+                        $("center>h3").animate({
+                            opacity:1
+                        },1000);
+                        $( ".kullaniciAdi" ).animate({
+                            opacity: 0
+                        }, 3000,"easeInCirc", function() {
+                            this.remove();
+                        });
                     });
                 }
             });
@@ -71,7 +83,22 @@
 
             socket.on("ayrildi",function (data) {
                 console.log(data);
-            })
+                $("#aktiviteler").append(" <center><span style=color:darkred;'>"+ data + "</span></center><br/>");
+                var heightAktivite = document.getElementById('aktiviteler').scrollHeight;
+                document.getElementById('aktiviteler').scrollTop = heightAktivite;
+                console.log(document.getElementById('aktiviteler').scrollTop);
+                console.log(document.getElementById('aktiviteler').scrollHeight);
+                console.log(data);
+            });
+            socket.on("katildi", function (data) {
+                console.log(data);
+                $("#aktiviteler").append(" <center><span style=color:grey;'>"+ data + "</span></center><br/>");
+                var heightAktivite = document.getElementById('aktiviteler').scrollHeight;
+                document.getElementById('aktiviteler').scrollTop = heightAktivite;
+                console.log(document.getElementById('aktiviteler').scrollTop);
+                console.log(document.getElementById('aktiviteler').scrollHeight);
+                console.log(data);
+            });
 
         });
         /*
@@ -123,6 +150,9 @@
                         <label class="mdl-textfield__label" for="sample1">Mesajınız...</label>
                     </div>
                     <hr/>
+                    <div id="aktiviteler">
+
+                    </div>
                     <div id="mesajlar">
 
                     </div>
@@ -138,6 +168,8 @@
 
 
 <script src="js/material.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
 </body>
 
 </html>
