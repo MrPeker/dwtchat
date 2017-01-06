@@ -1,0 +1,175 @@
+<html class="mdl-js">
+<head>
+    <title>
+        Deep Web Türkiye (DWT) - Chat
+    </title>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.pink-indigo.min.css">
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io.connect();
+        var kullanici = "";
+        $(document).ready(function () {
+            $( ".kullaniciAdi" ).animate({
+                opacity: 1
+            }, 3000,'easeOutCirc', function() {
+            });
+            $("input#kullaniciAdi").keyup(function (e) {
+
+                var tus = e.keyCode;
+                if(tus == 13) {
+                    kullanici = $("#kullaniciAdi").val();
+                    socket.emit("join", kullanici);
+                    console.log(kullanici);/*
+                    $(".kullaniciAdi").hide("fast", function () {
+                        this.remove();
+                    });*/
+                    $(".kullaniciAdi>center>h3").animate({
+                       opacity: .1
+                    },1000,"easeOutCirc");
+                    $("#kullaniciAdi").animate({
+                        opacity: .1
+                    },1000,"easeOutCirc",function () {
+                        $("center>h3").html("Hoşgeldiniz");
+                        $("center>h3").animate({
+                            opacity:1
+                        },1000);
+                        $( ".kullaniciAdi" ).animate({
+                            opacity: 0
+                        }, 3000,"easeInCirc", function() {
+                            this.remove();
+                        });
+                    });
+                }
+            });
+            $("#mesaj").keyup(function (e) {
+
+                var tus = e.keyCode;
+                if(tus == 13)
+                {
+                    var mytext = $("#mesaj").val();
+                    socket.emit("gonder",{"yazi" : mytext, "user" : kullanici, "socketID" : null, "mySocketID": null});
+                    //document.cookie = "mySocketID="+ data.socketID;
+                    console.log(socket.id);
+                    $("#mesaj").val("");
+
+                }
+
+            });
+            socket.on("alici",function (data) {
+                if(socket.id == data.socketID)
+                {
+                    $("#mesajlar").append('<div class="giden">'+ data.yazi +'</div>');
+                    var height = document.getElementById('mesajlar').scrollHeight;
+                    document.getElementById('mesajlar').scrollTop = height;
+                    console.log(document.getElementById('mesajlar').scrollTop);
+                    console.log(document.getElementById('mesajlar').scrollHeight);
+                    console.log(data);
+                }else
+                {
+                    $("#mesajlar").append('<div class="gelen">'+ data.user +' <br/> '+ data.yazi +'</div>');
+                    var height = document.getElementById('mesajlar').scrollHeight;
+                    document.getElementById('mesajlar').scrollTop = height;
+                    console.log(document.getElementById('mesajlar').scrollTop);
+                    console.log(document.getElementById('mesajlar').scrollHeight);
+                    console.log(data);
+                }
+            });
+
+            socket.on("ayrildi",function (data) {
+                console.log(data);
+                $("#aktiviteler").append(" <center><span style=color:darkred;'>"+ data + "</span></center><br/>");
+                var heightAktivite = document.getElementById('aktiviteler').scrollHeight;
+                document.getElementById('aktiviteler').scrollTop = heightAktivite;
+                console.log(document.getElementById('aktiviteler').scrollTop);
+                console.log(document.getElementById('aktiviteler').scrollHeight);
+                console.log(data);
+            });
+            socket.on("katildi", function (data) {
+                console.log(data);
+                $("#aktiviteler").append(" <center><span style=color:grey;'>"+ data + "</span></center><br/>");
+                var heightAktivite = document.getElementById('aktiviteler').scrollHeight;
+                document.getElementById('aktiviteler').scrollTop = heightAktivite;
+                console.log(document.getElementById('aktiviteler').scrollTop);
+                console.log(document.getElementById('aktiviteler').scrollHeight);
+                console.log(data);
+            });
+
+        });
+        /*
+         var socket = io.connect();
+         isim = prompt("isminizi yazınız");
+         socket.emit("gonder",isim);
+         socket.on("alici",function (data) {
+
+         alert(data + " adlı kişi sisteme bağlandı.");
+
+         });*/
+
+
+    </script>
+</head>
+<body>
+
+<div class="mdl-layout__container">
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable arama">
+        <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+            <i class="material-icons">search</i>
+        </label>
+        <div class="mdl-textfield__expandable-holder">
+            <input class="mdl-textfield__input" type="text" id="search">
+            <label class="mdl-textfield__label" for="search">Enter your query...</label>
+        </div>
+    </div>
+    <div class="bildirim material-icons mdl-badge mdl-badge--overlap" data-badge="183">public</div>
+    <div class="kullaniciAdi">
+        <center>
+            <h3>
+                Lütfen isminizi yazıp "Enter" tuşuna basınız.
+            </h3>
+        <br/>
+            <input type="text" id="kullaniciAdi" value="" />
+
+
+        </center>
+
+    </div>
+    <div class="demo-blog mdl-layout mdl-js-layout">
+        <main class="mdl-layout__content">
+            <div class="demo-blog__posts mdl-grid">
+
+                <div class="content" >
+
+                    <div class="mesaj mdl-textfield mdl-js-textfield">
+                        <input id="mesaj" class="mdl-textfield__input" type="text" id="sample1">
+                        <label class="mdl-textfield__label" for="sample1">Mesajınız...</label>
+                    </div>
+                    <hr/>
+                    <div id="aktiviteler">
+
+                    </div>
+                    <div id="mesajlar">
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="mdl-layout__obfuscator"></div>
+    </div>
+</div>
+
+
+
+
+<script src="js/material.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+
+</body>
+
+</html>

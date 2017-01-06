@@ -1,0 +1,271 @@
+i.mdi::before,
+span.mdi::before,
+button.mdi::before {
+    font-size: 24px;
+    line-height: 13px;
+}
+.btn.mdi::before,
+.btn .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.btn-xs.mdi::before,
+.btn-xs .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.btn-sm.mdi::before,
+.btn-sm .mdi::before {
+    font-size: 18px;
+    top: 3px;
+}
+.dropdown-menu .mdi {
+    width: 18px;
+}
+.dropdown-menu .mdi::before {
+    position: relative;
+    top: 4px;
+    left: -8px;
+}
+.nav .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.navbar .navbar-toggle .mdi::before {
+    position: relative;
+    top: 4px;
+    color: #FFF;
+}
+.breadcrumb .mdi::before {
+    position: relative;
+    top: 4px;
+}
+.breadcrumb a:hover {
+    text-decoration: none;
+}
+.breadcrumb a:hover span {
+    text-decoration: underline;
+}
+.alert .mdi::before {
+    position: relative;
+    top: 4px;
+    margin-right: 2px;
+}
+.input-group-addon .mdi::before {
+    position: relative;
+    top: 3px;
+}
+.navbar-brand .mdi::before {
+    position: relative;
+    top: 2px;
+    margin-right: 2px;
+}
+.list-group-item .mdi::before {
+    position: relative;
+    top: 3px;
+    left: -3px
+}
+.container-fluid {
+    margin: 0;
+    padding: auto;
+}
+.title {
+    //text-align: center;
+}
+.titleText{
+
+    color: #9593bb;
+    font-size:16px;
+    line-height:35px;
+    vertical-align: middle;
+
+}
+.titleImage{
+    padding: 7px;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 50px;
+}
+.left
+{
+    height:95.5vh;
+}
+.dwt-navbar-color-default
+{
+    background: #272648;
+}
+.dwt-bg-color-default
+{
+    background-color: #3f3e60;
+}
+.dwt-footer-color-default
+{
+    background-color: #484c7c;
+}
+.dwt-header-color-default
+{
+    background-color: #2e2c51;
+}
+.dwt-right-header-color-default
+{
+    background-color: #5c5a8c;
+}
+.left-footer{
+    height: 50px;
+    color: #eae6fd;
+    line-height:50px;
+    font-family: "Roboto Light";
+    font-size: 16px;
+    z-index: 9999;
+}
+.logout{
+    padding-top: 16px;
+}
+.ara
+{
+    border: 1px solid #4c4a6f;
+    border-left:none;
+    border-right:none;
+    width:100%;
+    padding-top: 5px;
+
+
+}
+@media screen and (min-width: 990px) {
+    body {
+        overflow: hidden;
+        width: 100vw;
+        height:100vh;
+    }
+}
+.ara:focus
+{
+
+}
+.ara > *
+{
+    background: none;
+    border:none;
+    padding-left:15px;
+    color:#cfcbf0;
+}
+.ara > input:focus
+{
+    outline:none;
+    box-shadow: none;
+}
+.ara > span > *
+{
+    background: none;
+}
+.ara > input
+{
+
+    padding-top: 9px;
+    font-size:16px;
+    padding-left: 5px;
+
+}
+.ara > hr
+{
+    background: white;
+    opacity: 1;
+}
+.hr-ara
+{
+    margin:0;
+    padding:0;
+    opacity: 0;
+}
+.left-head > div
+{
+    padding: 15px;
+    color:#cfcbf0;
+    font-size:18px;
+    font-family: "Roboto Light";
+
+}
+.left-users{
+
+    padding-top:15px;
+    padding-bottom: 15px;
+    color:#cfcbf0;
+    font-size:18px;
+    font-family: "Roboto Light";
+    transition-property: background-color,box-shadow;
+    transition-duration:.5s;
+
+}
+.left-user-image{
+
+    border-radius:50px;
+    width: 50px;
+    height:50px;
+}
+.left-user-name{
+    padding-top:3px;
+}
+.left-users:hover
+{
+
+    background-color: #2e2c51;
+    //box-shadow: 0px 0px 12px rgba(0,0,0,.5);
+
+
+}
+.left-users-main{
+    padding:0;
+}
+
+
+.right-head > div
+{
+    padding: 15px;
+    color:#cfcbf0;
+    font-size:18px;
+    font-family: "Roboto Light";
+
+}
+#message
+{
+    //height:10px;
+}
+
+.row:after, .row:before {
+    content: " ";
+    display: table;
+    clear: both;
+}
+.span6 {
+    float: left;
+    width: 100%;
+    height: 20px;
+
+}
+
+.emojionearea-standalone {
+    float: right;
+}
+.message
+{
+    padding:0;
+}
+.left
+{
+    padding:0;
+}
+.dwt-left-padding {
+    padding-left:15px;
+    padding-right:15px;
+}
+.right
+{
+    height:95.43vh;
+}
